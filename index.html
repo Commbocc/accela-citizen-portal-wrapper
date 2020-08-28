@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Accela Citizen Portal</title>
+
+    <!-- custom styles -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"
+    />
+    <link href="./stylesheets/style.css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- default wrapper -->
+    <div id="accela-app">
+      <v-app>
+        <v-main>
+          <!-- header -->
+          <header>
+            <v-app-bar
+              fixed
+              app
+              color="#054173"
+              dark
+              shrink-on-scroll
+              elevate-on-scroll
+              fade-img-on-scroll
+              clipped-left
+              src="./images/bg-park.jpg"
+            >
+              <template v-slot:img="{ props }">
+                <v-img
+                  v-bind="props"
+                  gradient="to bottom right, rgba(122,191,215,.8), rgba(5,65,115,.8)"
+                ></v-img>
+              </template>
+
+              <v-avatar class="mr-5" color="#fff">
+                <v-img src="./images/avatar.png"></v-img>
+              </v-avatar>
+
+              <v-toolbar-title> Citizen Portal </v-toolbar-title>
+
+              <v-spacer></v-spacer>
+
+              <v-btn class="ma-2" outlined rounded small>
+                <v-icon left small>mdi-help-circle</v-icon> Help
+              </v-btn>
+
+              <v-app-bar-nav-icon
+                @click="navDrawer = !navDrawer"
+              ></v-app-bar-nav-icon>
+            </v-app-bar>
+
+            <!-- drawer -->
+            <v-navigation-drawer
+              v-model="navDrawer"
+              app
+              left
+              clipped
+              mobile-breakpoint="xs"
+            >
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title class="title"
+                    >Hillsborough County</v-list-item-title
+                  >
+                  <v-list-item-subtitle>
+                    Online Government Services
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+
+              <v-divider></v-divider>
+
+              <v-list>
+                <div v-for="item in navItems">
+                  <!-- without children -->
+                  <v-list-item v-if="!item.children" :href="item.href">
+                    <v-list-item-icon>
+                      <v-icon>{{ item.icon }}</v-icon>
+                    </v-list-item-icon>
+
+                    <v-list-item-title :title="item.name"
+                      >{{ item.name }}</v-list-item-title
+                    >
+                  </v-list-item>
+                  <!-- with children -->
+                  <v-list-group v-else :prepend-icon="item.icon">
+                    <template v-slot:activator>
+                      <v-list-item-title :title="item.name"
+                        >{{ item.name }}</v-list-item-title
+                      >
+                    </template>
+
+                    <v-list-item
+                      v-for="(child, i) in item.children"
+                      :href="child.href"
+                    >
+                      <v-list-item-icon></v-list-item-icon>
+                      <v-list-item-title :title="child.name"
+                        >{{ child.name }}</v-list-item-title
+                      >
+                    </v-list-item>
+                  </v-list-group>
+                </div>
+              </v-list>
+            </v-navigation-drawer>
+          </header>
+          <!-- /header -->
+
+          <!-- content -->
+          <div id="aca_wrapper" class="container">
+            <h1>Welcome</h1>
+            <p v-for="n in 25">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores
+              quas temporibus voluptas excepturi voluptatibus voluptatum nihil
+              exercitationem reprehenderit! Tempore, magnam deserunt mollitia
+              blanditiis asperiores rerum quo perferendis deleniti quaerat
+              fugit.
+            </p>
+          </div>
+          <!-- /content -->
+
+          <!-- footer -->
+          <v-footer dark padless>
+            <v-card
+              dark
+              flat
+              tile
+              color="#054173"
+              class="text-center"
+              width="100%"
+            >
+              <v-card-text class="white--text">
+                <v-row justify="center" no-gutters>
+                  <v-btn color="white" text rounded class="my-2">
+                    County Website
+                  </v-btn>
+                  <v-btn color="white" text rounded class="my-2">
+                    Board of County Commissioners
+                  </v-btn>
+                  <v-btn color="white" text rounded class="my-2">
+                    County Locations
+                  </v-btn>
+                  <v-btn color="white" text rounded class="my-2"> Jobs </v-btn>
+                  <v-btn color="white" text rounded class="my-2">
+                    Contact Us
+                  </v-btn>
+                </v-row>
+              </v-card-text>
+
+              <v-divider></v-divider>
+
+              <v-card-text>
+                <v-btn icon href="#" target="_blank">
+                  <v-icon>mdi-facebook</v-icon>
+                </v-btn>
+                <v-btn icon href="#" target="_blank">
+                  <v-icon>mdi-twitter</v-icon>
+                </v-btn>
+                <v-btn icon href="#" target="_blank">
+                  <v-icon>mdi-linkedin</v-icon>
+                </v-btn>
+                <v-btn icon href="#" target="_blank">
+                  <v-icon>mdi-youtube</v-icon>
+                </v-btn>
+              </v-card-text>
+            </v-card>
+          </v-footer>
+
+          <!-- /footer -->
+        </v-main>
+      </v-app>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.js"></script>
+    <script src="./javascripts/navItems.js"></script>
+    <script src="./javascripts/app.js"></script>
+    <!-- default wrapper -->
+  </body>
+</html>
